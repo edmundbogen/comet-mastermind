@@ -4,6 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comet Browser Mastery Workbook - Edmund Bogen</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* Loading screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #189ad3 0%, #0d7aad 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #loading-screen .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #content {
+            display: none;
+        }
+
+        #content.show {
+            display: block;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .logout-btn {
+            background: #189ad3;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn:hover {
+            background: #0d7aad;
+        }
+
+        @media (max-width: 768px) {
+            .user-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
     <style>
         * {
             margin: 0;
@@ -386,6 +451,13 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
     <!-- Hero Section -->
     <div class="hero">
         <img src="mastermind-hero.png" alt="Welcome to the Beginning of Truly Agentic AI - Mastermind hosted by Edmund Bogen" class="hero-image">
@@ -396,6 +468,7 @@
         <nav class="nav">
             <div class="nav-brand">Comet Mastery Workbook</div>
             <button class="menu-toggle" onclick="toggleMenu()">Menu ☰</button>
+            <div class="user-info" id="userInfo"></div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#introduction">Introduction</a></li>
                 <li><a href="#getting-started">Getting Started</a></li>
@@ -1760,6 +1833,49 @@
                 }
             });
         });
+
+        // ============ AUTHENTICATION ============
+
+        // Initialize Supabase
+        const SUPABASE_URL = 'https://xripbgtxettewbsiyhkz.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhyaXBiZ3R4ZXR0ZXdic2l5aGt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2ODY4MjcsImV4cCI6MjA3NTI2MjgyN30.8HjmETq6PeM1pEdcAnT7nFBEeIUyCDW_kZH5GAHgrWA';
+
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Check authentication on page load
+        async function checkAuth() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+
+            if (!session) {
+                // Not logged in - redirect to login
+                window.location.href = 'login.html';
+            } else {
+                // Logged in - show content
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('content').classList.add('show');
+
+                // Display user info
+                const user = session.user;
+                const userInfoDiv = document.getElementById('userInfo');
+                const userName = user.user_metadata?.full_name || user.email;
+
+                userInfoDiv.innerHTML = `
+                    <span>Welcome, ${userName}</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                `;
+            }
+        }
+
+        // Logout function
+        async function logout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = 'login.html';
+        }
+
+        // Run auth check
+        checkAuth();
     </script>
+    </div>
 </body>
 </html>
