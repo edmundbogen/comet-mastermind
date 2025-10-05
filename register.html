@@ -209,10 +209,11 @@
         const SUPABASE_URL = 'https://xripbgtxettewbsiyhkz.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhyaXBiZ3R4ZXR0ZXdic2l5aGt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2ODY4MjcsImV4cCI6MjA3NTI2MjgyN30.8HjmETq6PeM1pEdcAnT7nFBEeIUyCDW_kZH5GAHgrWA';
 
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // Check if user is already logged in
-        supabase.auth.getSession().then(({ data: { session } }) => {
+        supabaseClient.auth.getSession().then(({ data: { session } }) => {
             if (session) {
                 window.location.href = 'index.html';
             }
@@ -249,7 +250,7 @@
             messageDiv.classList.remove('show', 'error', 'success');
 
             try {
-                const { data, error } = await supabase.auth.signUp({
+                const { data, error } = await supabaseClient.auth.signUp({
                     email: email,
                     password: password,
                     options: {
