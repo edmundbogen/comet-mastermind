@@ -2,46 +2,30 @@
 
 ## How to Access Your Training Materials
 
-### Step 1: Create Your Account
+### 📍 Go Here:
+**https://edmundbogen.github.io/comet-mastermind/welcome.html**
 
-1. Go to: **https://edmundbogen.github.io/comet-mastermind/register.html**
-2. Enter your:
-   - Full Name
-   - Email Address
-   - Password (minimum 6 characters)
+### ✅ First Time?
+1. Click **"Get Started - It's Free!"**
+2. Enter your name, email, and create a password
 3. Click **"Create Account"**
+4. You're in! Access the full workbook immediately.
 
-### Step 2: Login
-
-1. Go to: **https://edmundbogen.github.io/comet-mastermind/login.html**
+### 🔐 Already Registered?
+1. Click **"Login Here"**
 2. Enter your email and password
-3. Click **"Login"**
+3. Access your workbook
 
-You'll be automatically redirected to the full workbook!
+### 📚 What You Get:
+- Complete Comet Browser installation guide
+- 5 powerful use cases with step-by-step instructions
+- Copy-paste prompts for instant results
+- Real-world real estate scenarios
+- Security best practices
+- Bonus tips & keyboard shortcuts
 
-### Step 3: Access the Workbook
-
-Once logged in, you'll have full access to:
-- ✅ Complete Comet Browser training materials
-- ✅ 5 detailed use cases with step-by-step instructions
-- ✅ Copy-paste prompts for real estate scenarios
-- ✅ Security best practices
-- ✅ Bonus tips and keyboard shortcuts
-
-### Forgot Your Password?
-
-1. Go to: **https://edmundbogen.github.io/comet-mastermind/forgot-password.html**
-2. Enter your email address
-3. Check your email for a password reset link
-4. Follow the link to create a new password
-
----
-
-## Bookmark These Links:
-
-📚 **Main Workbook:** https://edmundbogen.github.io/comet-mastermind/
-🔐 **Login:** https://edmundbogen.github.io/comet-mastermind/login.html
-✍️ **Register:** https://edmundbogen.github.io/comet-mastermind/register.html
+### ❓ Forgot Your Password?
+Click the "Forgot password?" link on the login page.
 
 ---
 
